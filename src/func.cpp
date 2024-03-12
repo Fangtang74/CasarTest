@@ -13,6 +13,14 @@
 #include <cryptopp/base64.h>
 #include <cryptopp/files.h>
 #include <cryptopp/osrng.h>
+#include <stdio.h>
+#include <string.h>
+#include <inttypes.h>
+#include "NIST/rng.h"
+extern "C"
+{
+#include "FE.h"
+}
 
 // 编译命令
 // g++ -I/usr/local/include/cryptopp -o run main.cc -L/usr/local/lib/libcryptopp.a -lcryptopp
@@ -131,4 +139,17 @@ std::string rsaDecrypt(const std::string &cipherText, const CryptoPP::RSA::Priva
     );                                                                                                   // StringSource
 
     return decryptedText;
+}
+
+void FE()
+{
+    int cnt = 0;
+    uint8_t seed_a[32];
+    int8_t c[PARAMS_M] = {0};
+    uint8_t r1[PARAMS_R_BYTES] = {0};
+    uint8_t r2[PARAMS_R_BYTES] = {0};
+    int8_t w[PARAMS_N] = {0};
+    int8_t delta[PARAMS_N] = {0};
+    Gen(seed_a, c, r1, w);
+    Rep(r2, seed_a, c, w);
 }

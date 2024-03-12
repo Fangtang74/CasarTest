@@ -17,5 +17,6 @@ std::string aesEncrypt(const std::string &plainText, const CryptoPP::SecByteBloc
 std::string aesDecrypt(const std::string &cipherText, const CryptoPP::SecByteBlock &key);
 std::string rsaEncrypt(const std::string &plainText, const CryptoPP::RSA::PublicKey &publicKey);
 std::string rsaDecrypt(const std::string &cipherText, const CryptoPP::RSA::PrivateKey &privateKey);
+void FE();
 
 #endif // FUNC_H

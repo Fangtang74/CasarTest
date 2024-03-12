@@ -73,6 +73,7 @@ double karSchemeUav(int num)
         {
             string xorRes = xorFunction(rs, res);
         }
+        FE();
     }
     auto end = std::chrono::steady_clock::now();
     double dr_ms = std::chrono::duration<double, std::milli>(end - start).count();
@@ -82,6 +83,9 @@ double karSchemeUav(int num)
 double puSchemeUav(int num)
 {
     std::string content = "Hello, World!";
+    CryptoPP::AutoSeededRandomPool rng;
+    CryptoPP::SecByteBlock key(0x00, CryptoPP::AES::DEFAULT_KEYLENGTH);
+    rng.GenerateBlock(key, key.size());
     auto start = std::chrono::steady_clock::now();
     for (int i = 0; i < num; i++)
     {
@@ -100,6 +104,10 @@ double puSchemeUav(int num)
         vec = shuffleFunction(vec);
         string res = pufFunction(rs);
         string xorRes = xorFunction(rs, res);
+        std::string encryptedContent2 = aesEncrypt(content, key);
+        std::string decryptedContent2 = aesDecrypt(encryptedContent2, key);
+        encryptedContent2 = aesEncrypt(content, key);
+        decryptedContent2 = aesDecrypt(encryptedContent2, key);
     }
     auto end = std::chrono::steady_clock::now();
     double dr_ms = std::chrono::duration<double, std::milli>(end - start).count();
@@ -110,6 +118,9 @@ double ourSchemeUav(int num)
 {
     std::string content = "Hello, World!";
     auto dob = randomDouble();
+    CryptoPP::AutoSeededRandomPool rng;
+    CryptoPP::SecByteBlock key(0x00, CryptoPP::AES::DEFAULT_KEYLENGTH);
+    rng.GenerateBlock(key, key.size());
     auto start = std::chrono::steady_clock::now();
     for (int i = 0; i < num; i++)
     {
@@ -125,6 +136,8 @@ double ourSchemeUav(int num)
         res = pufFunction(rs);
         string xorRes = xorFunction(rs, res);
         auto chebyshevRes = chebyshevFunction(dob);
+        std::string encryptedContent2 = aesEncrypt(content, key);
+        std::string decryptedContent2 = aesDecrypt(encryptedContent2, key);
     }
     auto end = std::chrono::steady_clock::now();
     double dr_ms = std::chrono::duration<double, std::milli>(end - start).count();
