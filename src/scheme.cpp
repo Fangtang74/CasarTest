@@ -287,7 +287,7 @@ void getFuncTime()
     string rs = randomString(160);
     auto vec = randomVector(200);
     double sum = 0;
-    // 分别进行函数运算1000次并且计算平均时间   计算顺序为哈希，随机数，puf，洗牌，切比雪夫，rsa，aes
+    // 分别进行函数运算1000次并且计算平均时间   计算顺序为哈希，随机数，puf，洗牌，切比雪夫，rsa，aes, FE
     for (int i = 0; i < 1000; i++)
     {
         auto start = std::chrono::steady_clock::now();
@@ -352,9 +352,26 @@ void getFuncTime()
         sum += std::chrono::duration<double, std::milli>(end - start).count();
     }
     result.push_back(sum / 1000);
-
+    sum = 0;
+    for (int i = 0; i < 1000; i++)
+    {
+        auto start = std::chrono::steady_clock::now();
+        Gen(seed_a, c, r1, w);
+        auto end = std::chrono::steady_clock::now();
+        sum += std::chrono::duration<double, std::milli>(end - start).count();
+    }
+    result.push_back(sum / 1000);
+    sum = 0;
+    for (int i = 0; i < 1000; i++)
+    {
+        auto start = std::chrono::steady_clock::now();
+        Rep(r2, seed_a, c, w);
+        auto end = std::chrono::steady_clock::now();
+        sum += std::chrono::duration<double, std::milli>(end - start).count();
+    }
+    result.push_back(sum / 1000);
     std::ofstream file("funcTime.csv");
-    file << "hash,random,puf,shuffle,chebyshev,rsa,aes\n";
+    file << "hash,random,puf,shuffle,chebyshev,rsa,aes,FE_Gen,FE_Rep\n";
     for (const auto &val : result)
     {
         file << val << ",";
