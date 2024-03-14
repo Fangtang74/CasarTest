@@ -82,10 +82,6 @@ double karSchemeUav(int num)
         hashContent = hashFunction(rs);
         string res = pufFunction(rs);
         res = pufFunction(rs);
-        for (int i = 0; i < 8; i++)
-        {
-            string xorRes = xorFunction(rs, res);
-        }
         Gen(seed_a, c, r1, w);
     }
     auto end = std::chrono::steady_clock::now();
@@ -116,7 +112,6 @@ double puSchemeUav(int num)
         vec = shuffleFunction(vec);
         vec = shuffleFunction(vec);
         string res = pufFunction(rs);
-        string xorRes = xorFunction(rs, res);
     }
     auto end = std::chrono::steady_clock::now();
     double dr_ms = std::chrono::duration<double, std::milli>(end - start).count();
@@ -143,7 +138,6 @@ double ourSchemeUav(int num)
         hashContent = hashFunction(rs);
         string res = pufFunction(rs);
         res = pufFunction(rs);
-        string xorRes = xorFunction(rs, res);
         auto chebyshevRes = chebyshevFunction(dob);
     }
     auto end = std::chrono::steady_clock::now();
@@ -198,10 +192,6 @@ double karSchemeGs(int num)
         string rs = randomString(160);
         hashContent = hashFunction(rs);
         hashContent = hashFunction(rs);
-        for (int i = 0; i < 8; i++)
-        {
-            string xorRes = xorFunction(rs, res);
-        }
         Rep(r2, seed_a, c, w);
     }
     auto end = std::chrono::steady_clock::now();
@@ -230,9 +220,8 @@ double puSchemeGs(int num)
         vec = shuffleFunction(vec);
         vec = shuffleFunction(vec);
         vec = shuffleFunction(vec);
-        string res = pufFunction(rs);
-        string xorRes = xorFunction(rs, res);
         std::string encryptedContent2 = aesEncrypt(content, key);
+        std::string decryptedContent2 = aesDecrypt(encryptedContent2, key);
     }
     auto end = std::chrono::steady_clock::now();
     double dr_ms = std::chrono::duration<double, std::milli>(end - start).count();
@@ -256,7 +245,6 @@ double ourSchemeGs(int num)
         hashContent = hashFunction(rs);
         hashContent = hashFunction(rs);
         hashContent = hashFunction(rs);
-        string xorRes = xorFunction(rs, content);
         auto chebyshevRes = chebyshevFunction(dob);
         std::string encryptedContent2 = aesEncrypt(content, key);
         std::string decryptedContent2 = aesDecrypt(encryptedContent2, key);
