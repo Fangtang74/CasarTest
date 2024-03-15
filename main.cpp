@@ -15,18 +15,18 @@ int main()
 {
     std::ofstream file1("uavTime.csv");
     file1 << "Nums,feng,kar,pu,our\n";
-    for (int i = 10; i <= 50; i += 10)
+    for (int i = 1; i <= 50; i += 1)
     {
         file1 << i << "," << fengSchemeUav(i) << "," << karSchemeUav(i) << "," << puSchemeUav(i) << "," << ourSchemeUav(i) << "\n";
     }
     file1.close();
     std::ofstream file2("gsTime.csv");
     file2 << "Nums,feng,kar,pu,our\n";
-    for (int i = 10; i <= 50; i += 10)
+    for (int i = 1; i <= 50; i += 1)
     {
         file2 << i << "," << fengSchemeGs(i) << "," << karSchemeGs(i) << "," << puSchemeGs(i) << "," << ourSchemeGs(i) << "\n";
     }
     file2.close();
-    getFuncTime();
+    // getFuncTime();
     return 0;
 }
